@@ -2,27 +2,18 @@ import React, { useState } from "react";
 import "./ExpenseForm.css";
 
 export default function ExpenseForm() {
-  const [userInput, setUserInput] = useState({
-    enteredTitle: "",
-    enteredAmount: "",
-    enteredDate: "",
-  });
+  const [enteredTitle, setEnteredTitle] = useState("");
+  const [enteredAmount, setEnteredAmount] = useState("");
+  const [enteredDate, setEnteredDate] = useState("");
 
-  const titleChangeHandler = (e) => {
-    setUserInput((prevState) => {
-      return { ...prevState, enteredTitle: e.target.value };
-    });
-  };
-
-  const amountChangeHandler = (e) => {
-    setUserInput((prevState) => {
-      return { ...prevState, enteredAmount: e.target.value };
-    });
-  };
-  const dateChangeHandler = (e) => {
-    setUserInput((prevState) => {
-      return { ...prevState, enteredDate: e.target.value };
-    });
+  const inputChangeHandler = (i, value) => {
+    if (i === "title") {
+      setEnteredTitle(value);
+    } else if (i === "date") {
+      setEnteredDate(value);
+    } else {
+      setEnteredAmount(value);
+    }
   };
 
   return (
@@ -30,12 +21,19 @@ export default function ExpenseForm() {
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
-          <input type="text" onChange={titleChangeHandler} />
+          <input
+            type="text"
+            onChange={(e) => {
+              inputChangeHandler("title", e.target.value);
+            }}
+          />
         </div>
         <div className="new-expense__control">
           <label>Amount</label>
           <input
-            onChange={amountChangeHandler}
+            onChange={(e) => {
+              inputChangeHandler("amount", e.target.value);
+            }}
             type="number"
             min="0.01"
             step="0.01"
@@ -44,7 +42,9 @@ export default function ExpenseForm() {
         <div className="new-expense__control">
           <label>Date</label>
           <input
-            onChange={dateChangeHandler}
+            onChange={(e) => {
+              inputChangeHandler("date", e.target.value);
+            }}
             type="date"
             min="2019-01-01"
             max="2022-12-31"
