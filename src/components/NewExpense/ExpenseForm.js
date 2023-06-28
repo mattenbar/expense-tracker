@@ -25,6 +25,9 @@ export default function ExpenseForm() {
         date: new Date(enteredDate)
     }
     console.log(expenseData)
+    setEnteredAmount('')
+    setEnteredDate('')
+    setEnteredTitle('')
   };
 
   return (
@@ -33,6 +36,7 @@ export default function ExpenseForm() {
         <div className="new-expense__control">
           <label>Title</label>
           <input
+          value={enteredTitle}
             type="text"
             onChange={(e) => {
               inputChangeHandler("title", e.target.value);
@@ -42,6 +46,7 @@ export default function ExpenseForm() {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
+          value={enteredAmount}
             onChange={(e) => {
               inputChangeHandler("amount", e.target.value);
             }}
@@ -53,6 +58,7 @@ export default function ExpenseForm() {
         <div className="new-expense__control">
           <label>Date</label>
           <input
+          value={enteredDate}
             onChange={(e) => {
               inputChangeHandler("date", e.target.value);
             }}
