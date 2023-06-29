@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExpenseForm.css";
 
-export default function ExpenseForm() {
+export default function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
@@ -20,14 +20,15 @@ export default function ExpenseForm() {
     e.preventDefault();
 
     const expenseData = {
-        title: enteredTitle,
-        amount: enteredAmount,
-        date: new Date(enteredDate)
-    }
-    console.log(expenseData)
-    setEnteredAmount('')
-    setEnteredDate('')
-    setEnteredTitle('')
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate),
+    };
+
+    props.onSaveExpenseData(expenseData);
+    setEnteredAmount("");
+    setEnteredDate("");
+    setEnteredTitle("");
   };
 
   return (
@@ -36,7 +37,7 @@ export default function ExpenseForm() {
         <div className="new-expense__control">
           <label>Title</label>
           <input
-          value={enteredTitle}
+            value={enteredTitle}
             type="text"
             onChange={(e) => {
               inputChangeHandler("title", e.target.value);
@@ -46,7 +47,7 @@ export default function ExpenseForm() {
         <div className="new-expense__control">
           <label>Amount</label>
           <input
-          value={enteredAmount}
+            value={enteredAmount}
             onChange={(e) => {
               inputChangeHandler("amount", e.target.value);
             }}
@@ -58,7 +59,7 @@ export default function ExpenseForm() {
         <div className="new-expense__control">
           <label>Date</label>
           <input
-          value={enteredDate}
+            value={enteredDate}
             onChange={(e) => {
               inputChangeHandler("date", e.target.value);
             }}
